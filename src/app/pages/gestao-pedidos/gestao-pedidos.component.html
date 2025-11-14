@@ -1,0 +1,34 @@
+<div class="container-fluid p-4">
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = null"></button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <app-pedido-lista
+        [pedidos]="pedidos"
+        [pedidoSelecionadoId]="pedidoSelecionado?.id || null"
+        [isLoading]="isLoadingLista"
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        [totalCount]="totalCount"
+        (pedidoSelecionado)="selecionarPedido($event)"
+        (paginaAnterior)="paginaAnterior()"
+        (proximaPagina)="proximaPagina()"
+        (criarNovoPedido)="criarNovoPedido()">
+      </app-pedido-lista>
+    </div>
+
+    <div class="col-md-5">
+      <app-pedido-detalhes
+        [pedido]="pedidoSelecionado"
+        [isLoading]="isLoadingDetalhes"
+        (fecharPedido)="fecharPedido()"
+        (cancelar)="cancelarPedido()"
+        (adicionarItens)="adicionarItensAoPedido()"
+        (removerItem)="removerItemDoPedido($event)">
+      </app-pedido-detalhes>
+    </div>
+  </div>
+</div>
