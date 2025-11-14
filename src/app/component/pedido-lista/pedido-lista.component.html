@@ -1,0 +1,71 @@
+<div class="card shadow-sm">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Últimos Pedidos</h5>
+    <div class="d-flex gap-2 align-items-center">
+      <span class="badge bg-primary">{{ totalCount }} pedidos</span>
+      <button class="btn btn-sm btn-success" (click)="onCriarNovoPedido(); $event.stopPropagation()" title="Criar Novo Pedido">
+        <i class="bi bi-plus-circle"></i> Novo Pedido
+      </button>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>ID do Pedido</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of pedidos" 
+              class="cursor-pointer"
+              [class.table-active]="pedidoSelecionadoId === pedido.id"
+              (click)="onSelecionarPedido(pedido.id)">
+            <td><strong>#{{ pedido.id.substring(0, 8) }}</strong></td>
+            <td>{{ formatarData(pedido.dataCriacao) }}</td>
+            <td>
+              <span class="badge" [ngClass]="getStatusBadgeClass(pedido.status)">
+                {{ pedido.status }}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="onSelecionarPedido(pedido.id); $event.stopPropagation()">
+                <i class="bi bi-eye"></i> Ver
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="pedidos.length === 0 && !isLoading">
+            <td colspan="4" class="text-center text-muted py-4">
+              Nenhum pedido encontrado
+            </td>
+          </tr>
+          <tr *ngIf="isLoading">
+            <td colspan="4" class="text-center py-4">
+              <div class="spinner-border spinner-border-sm text-primary" role="status">
+                <span class="visually-hidden">Carregando...</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+    <button class="btn btn-sm btn-outline-secondary" 
+            (click)="onPaginaAnterior()" 
+            [disabled]="currentPage === 1">
+      <i class="bi bi-chevron-left"></i> Anterior
+    </button>
+    <div class="d-flex gap-2 align-items-center">
+      <span class="text-muted small">Página {{ currentPage }} de {{ totalPages }}</span>
+    </div>
+    <button class="btn btn-sm btn-outline-secondary" 
+            (click)="onProximaPagina()" 
+            [disabled]="currentPage === totalPages">
+      Próximo <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>

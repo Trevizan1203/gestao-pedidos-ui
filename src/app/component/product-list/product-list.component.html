@@ -1,0 +1,19 @@
+<div class="container mt-4 w-100">
+  <h2>Catálogo de Produtos</h2>
+
+  <div *ngIf="isLoading" class="alert alert-info">Carregando produtos...</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 pb-3" *ngIf="!isLoading && produtos.length > 0">
+    <div class="col" *ngFor="let produto of produtos">
+      <app-product-item 
+        [produto]="produto" 
+        (adicionarAoCarrinho)="adicionarAoCarrinho($event)">
+      </app-product-item>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && produtos.length === 0" class="alert alert-warning">
+    Nenhum produto encontrado na API externa.
+  </div>
+</div>
