@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Reset e configurações globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Customização do nav-link ativo */
+.nav-link.active {
+  background-color: #1abc9c !important;
+}
+
+/* Cursor pointer para elementos clicáveis */
+.cursor-pointer {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cursor-pointer:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

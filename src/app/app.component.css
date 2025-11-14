@@ -1,0 +1,9 @@
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
