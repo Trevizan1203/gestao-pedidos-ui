@@ -1,0 +1,8 @@
+.toast {
+  min-width: 300px;
+  margin-bottom: 0.5rem;
+}
+
+.toast-header {
+  border-bottom: none;
+}
